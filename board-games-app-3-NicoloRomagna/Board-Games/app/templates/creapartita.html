@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Nuova Partita - {{ gioco['nome'] }}{% endblock %}
+{% block content %}
+  <h1>Nuova Partita per {{ gioco['nome'] }}</h1>
+
+  {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+  {% endif %}
+
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label">Data</label>
+      <input class="form-control" type="date" name="data" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Vincitore</label>
+      <input class="form-control" type="text" name="vincitore" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Punteggio vincitore</label>
+      <input class="form-control" type="number" name="punteggio_vincitore" min="0" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Salva</button>
+    <a class="btn btn-secondary"
+       href="{{ url_for('main.partite_gioco', gioco_id=gioco['id']) }}">
+      Annulla
+    </a>
+  </form>
+{% endblock %}

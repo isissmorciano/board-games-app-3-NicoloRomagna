@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Nuovo Gioco{% endblock %}
+{% block content %}
+  <h1>Nuovo Gioco</h1>
+
+  {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+  {% endif %}
+
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label">Nome</label>
+      <input class="form-control" type="text" name="nome" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Numero giocatori massimo</label>
+      <input class="form-control" type="number" name="numero_giocatori_massimo" min="1" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Durata media (minuti)</label>
+      <input class="form-control" type="number" name="durata_media" min="1" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Categoria</label>
+      <input class="form-control" type="text" name="categoria" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Salva</button>
+    <a class="btn btn-secondary" href="{{ url_for('main.index') }}">Annulla</a>
+  </form>
+{% endblock %}

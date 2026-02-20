@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Partite - {{ gioco['nome'] }}{% endblock %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Partite di {{ gioco['nome'] }}</h1>
+    <a class="btn btn-primary"
+       href="{{ url_for('main.crea_partita', gioco_id=gioco['id']) }}">
+      Nuova Partita
+    </a>
+  </div>
+
+  <p>
+    Max giocatori: {{ gioco['numero_giocatori_massimo'] }} |
+    Durata media: {{ gioco['durata_media'] }} min |
+    Categoria: {{ gioco['categoria'] }}
+  </p>
+
+  {% if partite %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Vincitore</th>
+          <th>Punteggio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for partita in partite %}
+          <tr>
+            <td>{{ partita['data'] }}</td>
+            <td>{{ partita['vincitore'] }}</td>
+            <td>{{ partita['punteggio_vincitore'] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Nessuna partita registrata per questo gioco.</p>
+  {% endif %}
+
+  <a class="btn btn-secondary mt-3" href="{{ url_for('main.index') }}">Torna ai giochi</a>
+{% endblock %}
