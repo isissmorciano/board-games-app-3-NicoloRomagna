@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Giochi{% endblock %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Giochi da Tavolo</h1>
+    <a class="btn btn-primary" href="{{ url_for('main.crea_gioco') }}">Nuovo Gioco</a>
+  </div>
+
+  {% if giochi %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Max Giocatori</th>
+          <th>Durata (min)</th>
+          <th>Categoria</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for gioco in giochi %}
+          <tr>
+            <td>{{ gioco['nome'] }}</td>
+            <td>{{ gioco['numero_giocatori_massimo'] }}</td>
+            <td>{{ gioco['durata_media'] }}</td>
+            <td>{{ gioco['categoria'] }}</td>
+            <td>
+              <a class="btn btn-sm btn-outline-secondary"
+                 href="{{ url_for('main.partite_gioco', gioco_id=gioco['id']) }}">
+                Partite
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Nessun gioco presente. Aggiungine uno!</p>
+  {% endif %}
+{% endblock %}
